@@ -7,10 +7,14 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.webkit.WebSettings
+import android.webkit.WebView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import kotlinx.android.synthetic.*
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -20,6 +24,7 @@ class MainActivity : AppCompatActivity() {
         Manifest.permission.ACCESS_COARSE_LOCATION,
         Manifest.permission.CALL_PHONE
     )
+    private lateinit var webView: WebView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,6 +34,12 @@ class MainActivity : AppCompatActivity() {
 
         if(isPermissionGranted) {
             Toast.makeText(this, "isPermissionGranted is True", Toast.LENGTH_SHORT).show()
+
+            webView = findViewById(R.id.webView)
+            val webSetting = webView.settings
+            webSetting.javaScriptEnabled = true
+            webView.loadUrl("https://www.google.com/")
+
         }
     }
 
